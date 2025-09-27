@@ -18,6 +18,21 @@ El objetivo es gestionar una **agenda personal segura**, con almacenamiento loca
 
 ---
 
+## Características principales
+
+- Persistencia local con **Room Database**.
+- Arquitectura **MVVM** para separar UI de la lógica de negocio.
+- **Repository** como único punto de acceso a la base de datos.
+- **ViewModel** con **StateFlow** para exponer datos reactivos a la UI.
+- Operaciones asíncronas con **Coroutines**.
+- Soporte para:
+  - Categorías de eventos.
+  - Prioridad (ALTA, MEDIA, BAJA).
+  - Colores de identificación.
+  - Etiquetas múltiples.
+  - Eventos recurrentes con regla RRULE.
+- Generación de ID único para cada evento con **UuidGenerator**.
+
 ## ⚡ Configuración de Gradle
 
 Dependencias clave incluidas:
