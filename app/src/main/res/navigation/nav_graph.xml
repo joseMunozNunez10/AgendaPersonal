@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.jmdevs.agendapersonal.ui.splash.SplashFragment"
+        android:label="Splash" >
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splash_to_main"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jmdevs.agendapersonal.ui.auth.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_login_to_main"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.jmdevs.agendapersonal.ui.main.MainFragment"
+        android:label="Main" >
+        <action
+            android:id="@+id/action_main_to_createEdit"
+            app:destination="@id/createEditEventFragment" />
+        <action
+            android:id="@+id/action_main_to_detail"
+            app:destination="@id/detailEventFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createEditEventFragment"
+        android:name="com.jmdevs.agendapersonal.ui.event.CreateEditEventFragment"
+        android:label="Crear/Editar Evento" >
+        <argument
+            android:name="eventId"
+            app:argType="string"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailEventFragment"
+        android:name="com.jmdevs.agendapersonal.ui.event.DetailEventFragment"
+        android:label="Detalle Evento" >
+        <argument
+            android:name="eventId"
+            app:argType="string" />
+    </fragment>
+</navigation>
