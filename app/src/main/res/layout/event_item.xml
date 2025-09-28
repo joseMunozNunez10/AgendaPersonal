@@ -1,67 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardEvent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
+    android:layout_margin="8dp"
     app:cardElevation="4dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="@color/gray">
+    app:cardCornerRadius="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <TextView
-            android:id="@+id/tvEventTitle"
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Evento Importante"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:ellipsize="end"
-            android:maxLines="1"/>
+            android:text="Event title"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/tvEventDate"
+            android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="24 Sep 2025, 14:00"
-            android:textSize="14sp"
-            android:textColor="@color/gray"
-            android:layout_marginTop="4dp"/>
+            android:text="12 Jan 2025"
+            android:textAppearance="?attr/textAppearanceBody2" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:text="Event description here"
+            android:textAppearance="?attr/textAppearanceBody2" />
+
+        <View
+            android:id="@+id/viewPriority"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
             android:layout_marginTop="8dp"
-            android:gravity="start">
+            android:background="@android:color/darker_gray" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipCategory"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Trabajo"
-                app:chipBackgroundColor="@color/black"
-                app:chipStrokeWidth="1dp"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipPriority"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Alta"
-                android:layout_marginStart="8dp"
-                app:chipBackgroundColor="@color/btn_red"/>
-        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
+

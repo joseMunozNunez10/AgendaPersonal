@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/detail_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,50 +10,46 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvTitleDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Evento Importante"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:text="Event title"
+            android:textAppearance="?attr/textAppearanceHeadline5" />
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvDateDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción del evento..."
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:text="12 Jan 2025"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvDescriptionDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="24 Sep 2025, 14:00"
-            android:textSize="14sp"
-            android:textColor="@color/gray"
-            android:layout_marginBottom="16dp"/>
+            android:text="Event description"
+            android:layout_marginTop="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="end"
+            android:layout_marginTop="16dp">
 
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Editar"/>
+                android:text="Editar" />
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eliminar"
-                android:layout_marginStart="16dp"/>
+                android:text="Borrar"
+                android:layout_marginStart="12dp" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
-

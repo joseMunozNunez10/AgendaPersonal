@@ -17,9 +17,9 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             if (hasPin) {
                 findNavController().navigate(R.id.action_splash_to_login)
             } else {
-                findNavController().navigate(R.id.action_splash_to_main)
+                findNavController().navigate(R.id.action_splash_to_list)
             }
-        }, 1000) // 1 segundo
+        }, 2000) // 2 segundo
     }
 
     private fun checkPinSetup(): Boolean {

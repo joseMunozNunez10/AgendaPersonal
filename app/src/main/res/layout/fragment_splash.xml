@@ -18,7 +18,7 @@
         android:id="@+id/tvSplashTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agenda Personal"
+        android:text="Agenda Personal\n    by JM Deves"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal|top"

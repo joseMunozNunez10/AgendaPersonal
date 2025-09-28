@@ -1,4 +1,4 @@
-package com.jmdevs.agendapersonal.ui.main.viewmodel
+package com.jmdevs.agendapersonal.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,19 +11,17 @@ import kotlinx.coroutines.launch
 
 class EventViewModel(private val repository: EventRepository) : ViewModel() {
 
+    // Reactive stream of events
     val events: StateFlow<List<Event>> =
         repository.getAllEvents()
             .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun insert(event: Event) {
-        viewModelScope.launch { repository.insert(event) }
-    }
+    // Helper to observe a single event as StateFlow (UI can collect)
+    fun getEventByIdFlow(id: String): StateFlow<Event?> =
+        repository.getEventById(id)
+            .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
-    fun update(event: Event) {
-        viewModelScope.launch { repository.update(event) }
-    }
-
-    fun delete(event: Event) {
-        viewModelScope.launch { repository.delete(event) }
-    }
+    fun insert(event: Event) = viewModelScope.launch { repository.insert(event) }
+    fun update(event: Event) = viewModelScope.launch { repository.update(event) }
+    fun delete(event: Event) = viewModelScope.launch { repository.delete(event) }
 }

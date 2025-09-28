@@ -7,12 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.jmdevs.agendapersonal.data.local.dao.EventDao
 import com.jmdevs.agendapersonal.data.local.entity.Event
-import com.jmdevs.agendapersonal.utils.Converters
+import com.jmdevs.agendapersonal.util.Converters
 
 @Database(entities = [Event::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun eventDao(): EventDao
 
     companion object {
@@ -21,13 +20,13 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                val inst = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "agenda_database"
                 ).build()
-                INSTANCE = instance
-                instance
+                INSTANCE = inst
+                inst
             }
         }
     }

@@ -14,7 +14,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         // TODO: agregar BiometricPrompt y PIN
         // Simulación de login exitoso
         view.postDelayed({
-            findNavController().navigate(R.id.action_login_to_main)
+            findNavController().navigate(R.id.action_login_to_list)
         }, 500)
     }
 }
