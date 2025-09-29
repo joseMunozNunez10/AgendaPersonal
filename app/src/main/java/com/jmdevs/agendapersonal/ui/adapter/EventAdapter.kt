@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jmdevs.agendapersonal.R
 import com.jmdevs.agendapersonal.data.local.entity.Event
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class EventAdapter(
-    private val onItemClicked: (Event) -> Unit // Para manejar los clics
+    private val onItemClicked: (Event) -> Unit
 ) : ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffCallback()) {
 
-    // Lista de drawables de gradientes
     private val gradients = listOf(
         R.drawable.card_gradient,
         R.drawable.card_gradient2,
@@ -29,16 +31,23 @@ class EventAdapter(
         val cardView: MaterialCardView = itemView.findViewById(R.id.cardEvent)
         val title: TextView = itemView.findViewById(R.id.tvTitle)
         val description: TextView = itemView.findViewById(R.id.tvDescription)
+        val date: TextView = itemView.findViewById(R.id.tvDate) // Declaración de date
 
         fun bind(event: Event) {
             title.text = event.title
             description.text = event.description
 
-            // Asignar un gradiente random
+            // Formatear y establecer la fecha en español
+            try {
+                val sdf = SimpleDateFormat("dd MMM yyyy", Locale("es", "ES"))
+                date.text = sdf.format(Date(event.dateMillis)) // Corregido a event.dateMillis
+            } catch (e: Exception) {
+                date.text = "Fecha no disponible"
+            }
+
             val randomGradient = gradients.random()
             cardView.setBackgroundResource(randomGradient)
 
-            // Configurar el click listener
             itemView.setOnClickListener {
                 onItemClicked(event)
             }
@@ -52,17 +61,17 @@ class EventAdapter(
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val event = getItem(position) // Usar getItem() de ListAdapter
+        val event = getItem(position)
         holder.bind(event)
     }
 }
 
 class EventDiffCallback : DiffUtil.ItemCallback<Event>() {
     override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
-        return oldItem.id == newItem.id // Compara por ID
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
-        return oldItem == newItem // Compara todo el objeto (data class se encarga)
+        return oldItem == newItem
     }
 }
