@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado: Marcado -->
+    <item android:state_checked="true"
+          android:color="@color/black" /> <!-- Color negro cuando está marcado -->
+
+    <!-- Estado: No marcado (por defecto) -->
+    <!-- Usando el colorControlActivated del tema para el estado no marcado, que suele ser el color de acento (púrpura) -->
+    <item android:color="?attr/colorControlActivated" />
+</selector>

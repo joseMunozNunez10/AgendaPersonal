@@ -31,11 +31,15 @@ class EventListFragment : Fragment(R.layout.fragment_event_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentEventListBinding.bind(view)
 
-        adapter = EventAdapter { event ->
-
-            val action = EventListFragmentDirections.actionEventListFragmentToEventDetailFragment(event.id)
-            findNavController().navigate(action)
-        }
+        adapter = EventAdapter(
+            onItemClicked = { event ->
+                val action = EventListFragmentDirections.actionEventListFragmentToEventDetailFragment(event.id)
+                findNavController().navigate(action)
+            },
+            onEventStateChanged = { event ->
+                viewModel.update(event)
+            }
+        )
 
         binding.rvEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.rvEvents.adapter = adapter

@@ -20,4 +20,6 @@ class EventRepository(private val dao: EventDao) {
     suspend fun update(event: Event) = dao.update(event)
 
     suspend fun delete(event: Event) = dao.delete(event)
+
+    suspend fun isCompleted(event: Event) = dao.isCompleted(event)
 }

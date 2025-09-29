@@ -13,6 +13,9 @@ interface EventDao {
     @Update
     suspend fun update(event: Event)
 
+    @Update
+    suspend fun isCompleted(event: Event)
+
     @Delete
     suspend fun delete(event: Event)
 

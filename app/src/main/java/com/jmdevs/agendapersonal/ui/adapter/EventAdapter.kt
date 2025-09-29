@@ -1,8 +1,10 @@
 package com.jmdevs.agendapersonal.ui.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,7 +17,8 @@ import java.util.Date
 import java.util.Locale
 
 class EventAdapter(
-    private val onItemClicked: (Event) -> Unit
+    private val onItemClicked: (Event) -> Unit,
+    private val onEventStateChanged: (Event) -> Unit // Para notificar cambios de estado (isCompleted)
 ) : ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffCallback()) {
 
     private val gradients = listOf(
@@ -31,16 +34,17 @@ class EventAdapter(
         val cardView: MaterialCardView = itemView.findViewById(R.id.cardEvent)
         val title: TextView = itemView.findViewById(R.id.tvTitle)
         val description: TextView = itemView.findViewById(R.id.tvDescription)
-        val date: TextView = itemView.findViewById(R.id.tvDate) // Declaración de date
+        val date: TextView = itemView.findViewById(R.id.tvDate)
+        // Usamos el ID que confirmaste para el CheckBox
+        val checkBoxCompleted: CheckBox = itemView.findViewById(R.id.tvIsCompleted)
 
         fun bind(event: Event) {
             title.text = event.title
             description.text = event.description
 
-            // Formatear y establecer la fecha en español
             try {
                 val sdf = SimpleDateFormat("dd MMM yyyy", Locale("es", "ES"))
-                date.text = sdf.format(Date(event.dateMillis)) // Corregido a event.dateMillis
+                date.text = sdf.format(Date(event.dateMillis))
             } catch (e: Exception) {
                 date.text = "Fecha no disponible"
             }
@@ -50,6 +54,37 @@ class EventAdapter(
 
             itemView.setOnClickListener {
                 onItemClicked(event)
+            }
+
+            // Lógica para el CheckBox y el tachado del título
+            
+            // 1. Quitar listeners anteriores para evitar múltiples llamadas si bind se reutiliza.
+            checkBoxCompleted.setOnCheckedChangeListener(null)
+            
+            // 2. Establecer el estado inicial del CheckBox y el tachado del título
+            checkBoxCompleted.isChecked = event.isCompleted
+            updateTitleStrikeThrough(event.isCompleted)
+
+            // 3. Listener para cuando el CheckBox cambia de estado por interacción del usuario
+            checkBoxCompleted.setOnCheckedChangeListener { _, isCheckedByUser ->
+                // Actualizamos el estado en la copia local del objeto 'event'
+                event.isCompleted = isCheckedByUser
+                
+                // Aplicamos el cambio visual inmediatamente
+                updateTitleStrikeThrough(isCheckedByUser)
+                
+                // Notificamos hacia afuera (al Fragment/Activity, que luego llamará al ViewModel)
+                // para que el cambio se persista en la base de datos.
+                onEventStateChanged(event)
+            }
+        }
+
+        // Función helper para aplicar/quitar el tachado del título
+        private fun updateTitleStrikeThrough(isCompleted: Boolean) {
+            if (isCompleted) {
+                title.paintFlags = title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                title.paintFlags = title.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
         }
     }
@@ -72,6 +107,8 @@ class EventDiffCallback : DiffUtil.ItemCallback<Event>() {
     }
 
     override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
+        // Si 'Event' es una data class, la comparación por defecto 'oldItem == newItem'
+        // ya considerará todos los campos, incluido 'isCompleted'.
         return oldItem == newItem
     }
 }

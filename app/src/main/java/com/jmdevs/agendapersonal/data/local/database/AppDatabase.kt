@@ -9,7 +9,7 @@ import com.jmdevs.agendapersonal.data.local.dao.EventDao
 import com.jmdevs.agendapersonal.data.local.entity.Event
 import com.jmdevs.agendapersonal.util.Converters
 
-@Database(entities = [Event::class], version = 1, exportSchema = false)
+@Database(entities = [Event::class], version = 2, exportSchema = false) // Versión incrementada a 2
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
@@ -24,7 +24,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "agenda_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration() // Añadido para manejar cambios de esquema
+                .build()
                 INSTANCE = inst
                 inst
             }

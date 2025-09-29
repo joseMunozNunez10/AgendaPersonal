@@ -3,10 +3,7 @@ package com.jmdevs.agendapersonal.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-/**
- * Event entity - primary data model used across the app.
- * `id` is string UUID (we generate it in app with UuidGenerator).
- */
+
 @Entity(tableName = "events")
 data class Event(
     @PrimaryKey val id: String,
@@ -20,5 +17,6 @@ data class Event(
     val priority: PriorityLevel = PriorityLevel.MEDIA,
     val tags: List<String>? = null,
     val isRecurring: Boolean = false,
-    val recurrenceRule: String? = null
+    val recurrenceRule: String? = null,
+    var isCompleted : Boolean = false
 )

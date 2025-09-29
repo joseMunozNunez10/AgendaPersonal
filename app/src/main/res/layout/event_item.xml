@@ -44,5 +44,12 @@
             android:layout_marginTop="8dp"
             android:background="@android:color/darker_gray" />
 
+        <CheckBox
+            android:id="@+id/tvIsCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:buttonTint="@color/checkbox_custom_tint"
+            android:text="Mision Completada"/>
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
