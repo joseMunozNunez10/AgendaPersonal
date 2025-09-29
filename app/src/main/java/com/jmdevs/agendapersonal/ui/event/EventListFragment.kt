@@ -32,7 +32,7 @@ class EventListFragment : Fragment(R.layout.fragment_event_list) {
         _binding = FragmentEventListBinding.bind(view)
 
         adapter = EventAdapter { event ->
-            // Navigate to detail, passing event.id (nav action must exist)
+
             val action = EventListFragmentDirections.actionEventListFragmentToEventDetailFragment(event.id)
             findNavController().navigate(action)
         }
@@ -40,7 +40,7 @@ class EventListFragment : Fragment(R.layout.fragment_event_list) {
         binding.rvEvents.layoutManager = LinearLayoutManager(requireContext())
         binding.rvEvents.adapter = adapter
 
-        // collect the StateFlow
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.events.collectLatest { list ->
                 adapter.submitList(list)
@@ -48,7 +48,7 @@ class EventListFragment : Fragment(R.layout.fragment_event_list) {
         }
 
         binding.fabAddEvent.setOnClickListener {
-            // navigate to edit/create (no id -> create)
+
             findNavController().navigate(R.id.action_eventListFragment_to_eventEditFragment)
         }
     }

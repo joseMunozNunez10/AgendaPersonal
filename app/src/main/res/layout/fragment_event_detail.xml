@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardEventDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TextView
             android:id="@+id/tvTitleDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:text="Event title"
             android:textAppearance="?attr/textAppearanceHeadline5" />
 
@@ -20,6 +25,7 @@
             android:id="@+id/tvDateDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:text="12 Jan 2025"
             android:textAppearance="?attr/textAppearanceBody1"
             android:layout_marginTop="8dp" />
@@ -28,6 +34,7 @@
             android:id="@+id/tvDescriptionDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:text="Event description"
             android:layout_marginTop="8dp" />
 
@@ -35,12 +42,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_marginTop="16dp">
+            android:gravity="center_horizontal"
+            android:layout_marginTop="26dp">
 
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
+                android:backgroundTint="@color/black"
+                android:textSize="20sp"
                 android:layout_height="wrap_content"
                 android:text="Editar" />
 
@@ -48,6 +57,8 @@
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:textSize="20sp"
                 android:text="Borrar"
                 android:layout_marginStart="12dp" />
         </LinearLayout>
