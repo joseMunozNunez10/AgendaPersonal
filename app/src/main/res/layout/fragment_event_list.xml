@@ -4,19 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEvents"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:layout_height="match_parent">
 
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Mis Eventos"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEvents"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <!-- Botón flotante -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddEvent"
         android:backgroundTint="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="<agregar evento"
+        android:contentDescription="Agregar evento"
         android:src="@android:drawable/ic_input_add"
         app:layout_anchor="@id/rvEvents"
         app:layout_anchorGravity="bottom|end"
@@ -24,3 +46,4 @@
         android:layout_margin="16dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
