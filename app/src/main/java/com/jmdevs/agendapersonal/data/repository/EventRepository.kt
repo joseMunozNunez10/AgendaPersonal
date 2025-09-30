@@ -3,8 +3,9 @@ package com.jmdevs.agendapersonal.data.repository
 import com.jmdevs.agendapersonal.data.local.dao.EventDao
 import com.jmdevs.agendapersonal.data.local.entity.Event
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class EventRepository(private val dao: EventDao) {
+class EventRepository @Inject constructor(private val dao: EventDao) {
 
     fun getAllEvents(): Flow<List<Event>> = dao.getAllEvents()
 

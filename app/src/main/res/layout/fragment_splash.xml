@@ -25,14 +25,5 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="150dp"/>
 
-    <TextView
-        android:id="@+id/tvSplashSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="by JM Deves"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="35dp"
-        android:layout_marginTop="150dp"/>
+
 </FrameLayout>

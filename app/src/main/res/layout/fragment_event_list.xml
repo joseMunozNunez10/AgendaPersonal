@@ -32,18 +32,5 @@
 
     </LinearLayout>
 
-    <!-- Botón flotante -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddEvent"
-        android:backgroundTint="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Agregar evento"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/rvEvents"
-        app:layout_anchorGravity="bottom|end"
-        app:tint="@android:color/white"
-        android:layout_margin="16dp" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

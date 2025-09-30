@@ -10,19 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.jmdevs.agendapersonal.data.local.database.AppDatabase
 import com.jmdevs.agendapersonal.data.local.entity.Event
-import com.jmdevs.agendapersonal.data.repository.EventRepository
 import com.jmdevs.agendapersonal.databinding.FragmentEventEditBinding
 import com.jmdevs.agendapersonal.util.UuidGenerator
 import com.jmdevs.agendapersonal.viewmodel.EventViewModel
-import com.jmdevs.agendapersonal.viewmodel.EventViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+@AndroidEntryPoint
 class EventEditFragment : Fragment() {
 
     private var _binding: FragmentEventEditBinding? = null
@@ -30,12 +29,7 @@ class EventEditFragment : Fragment() {
 
     private val args: EventEditFragmentArgs by navArgs()
 
-    private val eventViewModel: EventViewModel by viewModels {
-        val application = requireActivity().application
-        val dao = AppDatabase.getDatabase(application).eventDao()
-        val repository = EventRepository(dao)
-        EventViewModelFactory(repository)
-    }
+    private val eventViewModel: EventViewModel by viewModels()
 
     private var currentEvent: Event? = null
 
@@ -51,20 +45,29 @@ class EventEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val eventId = args.eventId
+        val selectedDateMillis = args.selectedDate
+
         if (eventId != null && eventId != "@null" && eventId.isNotBlank()) {
             loadEventData(eventId)
         } else {
-            // New event, set current date and time as default
-            val sdfDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val sdfTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-            val currentDate = Date()
-            binding.etEventDate.setText(sdfDate.format(currentDate))
-            binding.etEventTime.setText(sdfTime.format(currentDate))
+            val dateToShow = if (selectedDateMillis != -1L) {
+                Date(selectedDateMillis)
+            } else {
+                Date()
+            }
+            prefillDateTime(dateToShow)
         }
 
         binding.btnSaveEvent.setOnClickListener {
             saveEvent()
         }
+    }
+
+    private fun prefillDateTime(date: Date) {
+        val sdfDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val sdfTime = SimpleDateFormat("HH:mm", Locale.getDefault())
+        binding.etEventDate.setText(sdfDate.format(date))
+        binding.etEventTime.setText(sdfTime.format(date))
     }
 
     private fun loadEventData(eventId: String) {
@@ -74,13 +77,7 @@ class EventEditFragment : Fragment() {
                     currentEvent = it
                     binding.etEventTitle.setText(it.title)
                     binding.etEventDescription.setText(it.description ?: "")
-
-                    val sdfDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    val sdfTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-                    val eventDate = Date(it.dateMillis)
-
-                    binding.etEventDate.setText(sdfDate.format(eventDate))
-                    binding.etEventTime.setText(sdfTime.format(eventDate))
+                    prefillDateTime(Date(it.dateMillis))
                 }
             }
         }
@@ -124,8 +121,7 @@ class EventEditFragment : Fragment() {
                 description = description.ifEmpty { null },
                 dateMillis = eventMillis,
                 createdAt = System.currentTimeMillis(),
-                updatedAt = System.currentTimeMillis() 
-               
+                updatedAt = System.currentTimeMillis()
             )
         }
 
@@ -134,7 +130,7 @@ class EventEditFragment : Fragment() {
                 eventViewModel.update(updatedEvent)
                 Toast.makeText(requireContext(), "Evento actualizado", Toast.LENGTH_SHORT).show()
             } else {
-                eventViewModel.insert(updatedEvent) // updatedEvent contiene el nuevo evento en este caso
+                eventViewModel.insert(updatedEvent)
                 Toast.makeText(requireContext(), "Evento guardado", Toast.LENGTH_SHORT).show()
             }
             findNavController().popBackStack()

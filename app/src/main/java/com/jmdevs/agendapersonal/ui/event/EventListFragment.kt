@@ -8,27 +8,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmdevs.agendapersonal.R
-import com.jmdevs.agendapersonal.data.local.database.AppDatabase
-import com.jmdevs.agendapersonal.data.repository.EventRepository
 import com.jmdevs.agendapersonal.databinding.FragmentEventListBinding
 import com.jmdevs.agendapersonal.ui.adapter.EventAdapter
 import com.jmdevs.agendapersonal.viewmodel.EventViewModel
-import com.jmdevs.agendapersonal.viewmodel.EventViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class EventListFragment : Fragment(R.layout.fragment_event_list) {
 
     private var _binding: FragmentEventListBinding? = null
     private val binding get() = _binding!!
 
-    private val dao by lazy { AppDatabase.getDatabase(requireContext()).eventDao() }
-    private val repo by lazy { EventRepository(dao) }
-    private val viewModel: EventViewModel by viewModels { EventViewModelFactory(repo) }
+    private val viewModel: EventViewModel by viewModels()
 
     private lateinit var adapter: EventAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         _binding = FragmentEventListBinding.bind(view)
 
         adapter = EventAdapter(
@@ -49,11 +47,6 @@ class EventListFragment : Fragment(R.layout.fragment_event_list) {
             viewModel.events.collectLatest { list ->
                 adapter.submitList(list)
             }
-        }
-
-        binding.fabAddEvent.setOnClickListener {
-
-            findNavController().navigate(R.id.action_eventListFragment_to_eventEditFragment)
         }
     }
 

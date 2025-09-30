@@ -2,4 +2,7 @@
     <string name="app_name">AgendaPersonal</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_title_events">Eventos</string>
+    <string name="menu_title_calendar">Calendario</string>
+    <string name="menu_title_create_event">Evento</string>
 </resources>

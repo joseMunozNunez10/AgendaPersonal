@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.splashscreen)
 
     // Room
     implementation(libs.room.runtime)
@@ -71,6 +73,13 @@ dependencies {
 
     // Security Crypto
     implementation(libs.security.crypto)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    // Calendar
+    implementation(libs.material.calendar.view)
 
     // Testing
     testImplementation(libs.junit)

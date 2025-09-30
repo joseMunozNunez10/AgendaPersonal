@@ -16,9 +16,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Repositorio para librerías como Material-Calendar-View
+        maven { 
+            url = uri("https://jitpack.io")
+            content {
+                // Especificamos que este repositorio contiene los artefactos del grupo com.github.Applandeo
+                includeGroup("com.github.Applandeo")
+            }
+        }
     }
 }
 
 rootProject.name = "AgendaPersonal"
 include(":app")
- 
