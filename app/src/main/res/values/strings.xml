@@ -5,4 +5,6 @@
     <string name="menu_title_events">Eventos</string>
     <string name="menu_title_calendar">Calendario</string>
     <string name="menu_title_create_event">Evento</string>
+    <string name="menu_title_finance">Finanzas</string>
+
 </resources>

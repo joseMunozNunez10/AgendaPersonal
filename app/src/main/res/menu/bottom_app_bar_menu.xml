@@ -23,4 +23,11 @@
         app:showAsAction="ifRoom"
         android:orderInCategory="3" />
 
+    <item
+        android:id="@+id/financeFragment"
+        android:icon="@drawable/ic_finance"
+        android:title="@string/menu_title_finance"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="4" />
+
 </menu>

@@ -97,4 +97,10 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/financeFragment"
+        android:name="com.jmdevs.agendapersonal.ui.finance.FinanceFragment"
+        android:label="Finance"
+        tools:layout="@layout/fragment_finance"/>
+
 </navigation>
