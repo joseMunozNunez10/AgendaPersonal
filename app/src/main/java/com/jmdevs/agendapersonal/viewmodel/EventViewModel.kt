@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmdevs.agendapersonal.data.local.entity.Event
 import com.jmdevs.agendapersonal.data.repository.EventRepository
+import com.jmdevs.agendapersonal.utils.AlarmScheduler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EventViewModel @Inject constructor(private val repository: EventRepository) : ViewModel() {
+class EventViewModel @Inject constructor(
+    private val repository: EventRepository,
+    private val alarmScheduler: AlarmScheduler
+) : ViewModel() {
 
     val events: StateFlow<List<Event>> =
         repository.getAllEvents()
@@ -27,8 +31,18 @@ class EventViewModel @Inject constructor(private val repository: EventRepository
         return repository.getEventsBetween(startMillis, endMillis)
     }
 
-    fun insert(event: Event) = viewModelScope.launch { repository.insert(event) }
-    fun update(event: Event) = viewModelScope.launch { repository.update(event) }
-    fun delete(event: Event) = viewModelScope.launch { repository.delete(event) }
-}
+    fun insert(event: Event) = viewModelScope.launch {
+        repository.insert(event)
+        alarmScheduler.schedule(event)
+    }
 
+    fun update(event: Event) = viewModelScope.launch {
+        repository.update(event)
+        alarmScheduler.schedule(event)
+    }
+
+    fun delete(event: Event) = viewModelScope.launch {
+        repository.delete(event)
+        alarmScheduler.cancel(event)
+    }
+}
