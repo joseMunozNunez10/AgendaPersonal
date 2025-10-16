@@ -3,6 +3,8 @@ package com.jmdevs.agendapersonal.di
 import android.content.Context
 import androidx.room.Room
 import com.jmdevs.agendapersonal.data.local.dao.EventDao
+import com.jmdevs.agendapersonal.data.local.dao.FinancialCategoryDao
+import com.jmdevs.agendapersonal.data.local.dao.TransactionDao
 import com.jmdevs.agendapersonal.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -30,5 +32,15 @@ object DatabaseModule {
     @Provides
     fun provideEventDao(appDatabase: AppDatabase): EventDao {
         return appDatabase.eventDao()
+    }
+
+    @Provides
+    fun provideTransactionDao(appDatabase: AppDatabase): TransactionDao {
+        return appDatabase.transactionDao()
+    }
+
+    @Provides
+    fun provideFinancialCategoryDao(appDatabase: AppDatabase): FinancialCategoryDao {
+        return appDatabase.financialCategoryDao()
     }
 }

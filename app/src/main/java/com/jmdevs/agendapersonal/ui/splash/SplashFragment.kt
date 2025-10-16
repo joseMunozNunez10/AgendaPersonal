@@ -13,11 +13,13 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         // Simula carga de recursos o verificación de PIN/Biometría
         view.postDelayed({
-            val hasPin = checkPinSetup()
-            if (hasPin) {
-                findNavController().navigate(R.id.action_splash_to_login)
-            } else {
-                findNavController().navigate(R.id.action_splash_to_list)
+            if (findNavController().currentDestination?.id == R.id.splashFragment) {
+                val hasPin = checkPinSetup()
+                if (hasPin) {
+                    findNavController().navigate(R.id.action_splash_to_login)
+                } else {
+                    findNavController().navigate(R.id.action_splash_to_list)
+                }
             }
         }, 2000) // 2 segundo
     }

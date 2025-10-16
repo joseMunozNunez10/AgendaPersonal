@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_root"
     android:layout_width="match_parent"
@@ -7,8 +9,10 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
+    android:background="@color/white"
     tools:context=".ui.auth.LoginFragment">
 
+    <!-- Título -->
     <TextView
         android:id="@+id/tvLoginTitle"
         android:layout_width="wrap_content"
@@ -16,23 +20,41 @@
         android:text="Ingresa tu PIN"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="24dp"
+        android:textColor="@android:color/black"/>
 
-    <EditText
-        android:id="@+id/etPin"
+    <!-- Campo PIN -->
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="PIN"
-        android:inputType="numberPassword"
-        android:maxLength="6"
-        android:layout_marginBottom="16dp"/>
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        android:hint="PIN">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botón Ingresar -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/black"
-        android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:text="Ingresar"/>
+        android:layout_marginTop="24dp"
+        android:text="Ingresar"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/black"
+        app:cornerRadius="12dp"/>
 
 </LinearLayout>

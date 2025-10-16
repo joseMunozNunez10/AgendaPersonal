@@ -17,7 +17,7 @@ import com.jmdevs.agendapersonal.util.Converters
         Transaction::class,
         FinancialCategory::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

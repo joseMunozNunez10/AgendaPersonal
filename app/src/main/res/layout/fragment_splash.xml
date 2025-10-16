@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/splash_root"
     android:layout_width="match_parent"
@@ -7,23 +8,38 @@
     android:background="@color/white"
     tools:context=".ui.splash.SplashFragment">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progressBackgroundTint="@color/black"
-        android:layout_gravity="center"/>
-
+    <!-- Título principal -->
     <TextView
         android:id="@+id/tvSplashTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Agenda Personal"
-        android:textSize="28sp"
+        android:textSize="32sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="180dp"/>
 
+    <!-- ProgressBar circular -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:indeterminateTint="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"/>
+
+    <!-- Subtítulo opcional -->
+    <TextView
+        android:id="@+id/tvSplashSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestión completa de tu agenda"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="80dp"/>
 
 </FrameLayout>
+

@@ -7,13 +7,13 @@ import java.util.Date
 @Entity(tableName = "transactions")
 data class Transaction(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val amount: Double,
+    val id: Long = 0,
+    val amount: Long,
     val type: String, // "INGRESO" o "GASTO"
     val category: String,
     val description: String,
     val date: Long,
     val paymentMethod: String,
     val currency: String = "Clp",
-    val balance: Double
+    val balance: Long
 )

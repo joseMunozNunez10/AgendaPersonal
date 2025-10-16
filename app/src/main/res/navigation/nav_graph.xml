@@ -101,6 +101,38 @@
         android:id="@+id/financeFragment"
         android:name="com.jmdevs.agendapersonal.ui.finance.FinanceFragment"
         android:label="Finance"
-        tools:layout="@layout/fragment_finance"/>
+        tools:layout="@layout/fragment_finance">
+        <action
+            android:id="@+id/action_financeFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment" />
+        <action
+            android:id="@+id/action_financeFragment_to_editTransactionFragment"
+            app:destination="@id/editTransactionFragment" />
+        <action
+            android:id="@+id/action_financeFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.jmdevs.agendapersonal.ui.finance.AddTransactionFragment"
+        android:label="Add Transaction"
+        tools:layout="@layout/fragment_add_transaction" />
+
+    <fragment
+        android:id="@+id/editTransactionFragment"
+        android:name="com.jmdevs.agendapersonal.ui.finance.EditTransactionFragment"
+        android:label="Edit Transaction"
+        tools:layout="@layout/fragment_edit_transaction">
+        <argument
+            android:name="transaction_id"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.jmdevs.agendapersonal.ui.finance.AddCategoryFragment"
+        android:label="Add Category"
+        tools:layout="@layout/fragment_add_category" />
 
 </navigation>
