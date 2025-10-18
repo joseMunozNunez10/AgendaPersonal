@@ -22,18 +22,6 @@
     -   Diseño limpio y claro basado en Material Design 3.
     -   Soporte para tema claro y oscuro.
 
-## 📸 Capturas de Pantalla (Preview)
-
-*(Aquí puedes añadir capturas de pantalla de tu aplicación)*
-
-| Pantalla Principal (Calendario) | Resumen Financiero |
-| :-----------------------------: | :--------------------: |
-| *(img/screenshot_main.png)*     | *(img/screenshot_finance.png)* |
-
-| Añadir Transacción              | Inicio de Sesión (Biométrico) |
-| :------------------------------: | :---------------------------: |
-| *(img/screenshot_add_transaction.png)* | *(img/screenshot_login.png)*   |
-
 
 ## 🛠️ Tecnologías Utilizadas
 
